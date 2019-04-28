@@ -34,9 +34,9 @@ epison_y<-matrix(rnorm(n2, 0, sd = sqrt(squaresigma_y)), n2, 1)
 y<-y_mean+epison_y
 
 #run the PMR-Egger model using PMR function
-fmH1 = PMR(x, y, zx, zy,constrgamma=0,constralpha = 0)
-fmH0gamma = PMR(x, y, zx, zy,constrgamma=1,constralpha = 0)
-fmH0alpha = PMR(x, y, zx, zy,constrgamma=0,constralpha = 1)
+fmH1 = PMR_cpp(x, y, zx, zy,gammain=0,alphain = 0,max_iterin =1000,epsin=1e-5)
+fmH0gamma = PMR_cpp(x, y, zx, zy,gammain=1, alphain = 0,max_iterin =1000,epsin=1e-5)
+fmH0alpha = PMR_cpp(x, y, zx, zy,gammain=0,alphain = 1,max_iterin =1000, epsin=1e-5)
 loglikH1=max(fmH1$loglik,na.rm=T)
 loglikH0gamma=max(fmH0gamma$loglik,na.rm=T)
 loglikH0alpha=max(fmH0alpha$loglik,na.rm=T)
